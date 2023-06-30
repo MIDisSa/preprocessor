@@ -1,2 +1,4 @@
 # data-processing
-takes csv containing data in specific format and outputs csv that can be used as input for netlogo model
+This python file will take a csv file containing survey results in a specific format. The survey results are then processed to yield useable data for the netlogo model. The results of the processing shall then be read by the *automator* who uses the *Controlling API* to submit the data to the netlogo model. See [this](https://trello.com/c/a8CiA435/3-ist-python-connection-implement-in-java-m%C3%B6glich-ausprobieren) Trello task for ways how the *automator* could read out the data from this file. Another possibility would be to create a csv file which can be read by the *automator*.
+
+![role of the preprocessor in the architecture](image.png)
