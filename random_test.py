@@ -25,8 +25,9 @@ def plot_histogram(data_source, skewness_type):
 data_source_right_skew = "/Users/anki/Documents/Uni_Zurich/Master_project/data_right_skew.txt"
 data_source_left_skew = "/Users/anki/Documents/Uni_Zurich/Master_project/data_left_skew.txt"
 data_source_left_skew_steeper = "/Users/anki/Documents/Uni_Zurich/Master_project/data_right_skew_steeper.txt"
-
+data_source_slider_skew = "/Users/anki/Documents/Uni_Zurich/Master_project/data_slider_skew.txt"
 
 plot_histogram(data_source_right_skew, "Right Skew")
 plot_histogram(data_source_left_skew, "Left Skew")
 plot_histogram(data_source_left_skew_steeper, "Left Skew Steeper")
+plot_histogram(data_source_slider_skew, "With Slider")
