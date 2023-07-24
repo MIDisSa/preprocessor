@@ -15,10 +15,27 @@ def plot_histogram(data_source, skewness_type):
                 data.append(float(match))
 
     # Plot
-    plt.hist(data, bins=20)
+    plt.hist(data, bins=200)
     plt.xlabel("Values")
     plt.ylabel("Frequency")
     plt.title(f"Histogram of {skewness_type} Output")
+    plt.show()
+
+
+def plot_histogram_small(data_source, skewness_type):
+    data = []
+    with open(data_source, 'r') as file:
+        for line in file:
+            matches = re.findall(r"[-+]?\d*\.\d+|\d+", line)  # regex matches floating numbers and int
+            for match in matches:
+                data.append(float(match))
+
+    # Plot
+    plt.hist(data, bins=200)
+    plt.xlabel("Values")
+    plt.ylabel("Frequency")
+    plt.title(f"Histogram of {skewness_type} Output")
+    plt.xlim([0, 1])
     plt.show()
 
 
@@ -30,4 +47,4 @@ data_source_slider_skew = "/Users/anki/Documents/Uni_Zurich/Master_project/data_
 plot_histogram(data_source_right_skew, "Right Skew")
 plot_histogram(data_source_left_skew, "Left Skew")
 plot_histogram(data_source_left_skew_steeper, "Left Skew Steeper")
-plot_histogram(data_source_slider_skew, "With Slider")
+plot_histogram_small(data_source_slider_skew, "With Slider")
