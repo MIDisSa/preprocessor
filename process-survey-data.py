@@ -128,7 +128,11 @@ df_mentionPerc = df_mentionPerc[df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWO
 
 mean_intra_mention_percentage = df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts in your village. In how many discussions were hermetic storage bags mentioned?'].mean()
 mean_inter_mention_percentage = df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts outside of your village. In how many discussions were hermetic storage bags mentioned?'].mean()
-# TODO: skewness
+
+stdev_intra_mention_percentage = df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts in your village. In how many discussions were hermetic storage bags mentioned?'].std()
+stdev_inter_mention_percentage = df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts outside of your village. In how many discussions were hermetic storage bags mentioned?'].std()
+
+
 
 
 """
@@ -140,7 +144,10 @@ df_interactionFreq = df_renamed
 df_interactionFreq = df.dropna(subset=['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the people you know in your village. In a typical week, how many times do you communicate with each person you know? The way of communication (in-person or phone) does not matter.', 'PART 7: SOCIAL CAPITAL AND NETWORKING/Now think about people you know that don’t live in your village. In a typical week, how many people outside your village do you communicate with? Include all relatives, friends, traders, extension officers and other people. The way of communication (in-person or phone) does not matter.'])
 mean_intra_interaction_frequency = df_interactionFreq['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the people you know in your village. In a typical week, how many times do you communicate with each person you know? The way of communication (in-person or phone) does not matter.'].mean()
 mean_inter_interaction_frequency = df_interactionFreq['PART 7: SOCIAL CAPITAL AND NETWORKING/Now think about people you know that don’t live in your village. In a typical week, how many people outside your village do you communicate with? Include all relatives, friends, traders, extension officers and other people. The way of communication (in-person or phone) does not matter.'].mean()
-# TODO: skewness
+
+stdev_intra_interaction_frequency = df_interactionFreq['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the people you know in your village. In a typical week, how many times do you communicate with each person you know? The way of communication (in-person or phone) does not matter.'].std()
+stdev_inter_interaction_frequency = df_interactionFreq['PART 7: SOCIAL CAPITAL AND NETWORKING/Now think about people you know that don’t live in your village. In a typical week, how many people outside your village do you communicate with? Include all relatives, friends, traders, extension officers and other people. The way of communication (in-person or phone) does not matter.'].std()
+
 
 
 
@@ -151,7 +158,8 @@ mean_inter_interaction_frequency = df_interactionFreq['PART 7: SOCIAL CAPITAL AN
 """
 df_friends = df_renamed
 nr_default_friends_inter_village = df_friends['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the people you know in your village that do not live in your household. In a typical week, how many different people from your village do you communicate with? Include all relatives, friends, neighbours and other people who live in your village. The way of communication (in-person or phone) does not matter.'].mean()
-# TODO: skewness
+std_nr_default_friends_inter_village = df_friends['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the people you know in your village that do not live in your household. In a typical week, how many different people from your village do you communicate with? Include all relatives, friends, neighbours and other people who live in your village. The way of communication (in-person or phone) does not matter.'].std()
+
 
 
 
@@ -164,37 +172,38 @@ nr_default_friends_inter_village = df_friends['PART 7: SOCIAL CAPITAL AND NETWOR
 # add derived data into this dataframe
 # this dataframe will be exported as csv file to be passed to the automator
 # columns are named after parameter names in netlogo model
-df_results = pd.DataFrame(columns=['train_chief_influence', 'nr_default_friends_inter_village', 'avg_intra_village_interaction_frequency',
-                                   'avg_inter_village_interaction_frequency', 'avg_chief_farmer_meeting_frequency',
-                                   'farmgroup_meeting_attendance_percentage', 'avg_intra_mention_percentage',
-                                   'avg_inter_mention_percentage', 'avg_meeting_mention_percentage',
+df_results = pd.DataFrame(columns=['train_chief_influence', 'nr_default_friends_inter_village', 'std_nr_default_friends_inter_village', 'avg_intra_village_interaction_frequency', 'stdev_intra_village_interaction_frequency',
+                                   'avg_inter_village_interaction_frequency', 'stdev_inter_village_interaction_frequency', 'avg_chief_farmer_meeting_frequency', 'avg_intra_mention_percentage', 'stdev_intra_mention_percentage',
+                                   'avg_inter_mention_percentage', 'stdev_inter_mention_percentage',
                                    'percentage_negative_WoM', 'base_adoption_probability'])
+
 
 # Assign the values
 df_results['train_chief_influence'] = sigmoid_value_TCI
 
 # nr_default_friends_inter_village
 df_results['nr_default_friends_inter_village'] = [nr_default_friends_inter_village]
+df_results['std_nr_default_friends_inter_village'] = [std_nr_default_friends_inter_village]
+
 
 # avg_intra_mention_percentage
 df_results['avg_intra_mention_percentage'] = [mean_intra_mention_percentage]
+df_results['stdev_intra_mention_percentage'] = [stdev_intra_mention_percentage]
 
 # avg_inter_mention_percentage
 df_results['avg_inter_mention_percentage'] = [mean_inter_mention_percentage]
+df_results['stdev_inter_mention_percentage'] = [stdev_inter_mention_percentage]
 
 # avg_intra_village_interaction_frequency
 df_results['avg_intra_village_interaction_frequency'] = [mean_intra_interaction_frequency]
+df_results['stdev_intra_village_interaction_frequency'] = [stdev_intra_interaction_frequency]
 
 # avg_inter_village_interaction_frequency
 df_results['avg_inter_village_interaction_frequency'] = [mean_inter_interaction_frequency]
+df_results['stdev_inter_village_interaction_frequency'] = [stdev_inter_interaction_frequency]
 
 # avg_chief_farmer_meeting_frequency
 df_results['avg_chief_farmer_meeting_frequency'] = [30]
-
-# farmgroup-meeting-attendance-percentage
-# eigentlich Slider rein?
-
-# avg_meeting_mention_percentage
 
 # percentage-negative-wom
 df_results['percentage_negative_WoM'] = [0.19]
