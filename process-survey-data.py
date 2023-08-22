@@ -242,13 +242,3 @@ df_results['base_adoption_probability'] = [3]
 
 # export data as csv file
 df_results.to_csv("data-processed.csv")
-
-#pd.set_option('display.max_rows', None)
-
-#
-
-#df_interactionFreq['PART 7: SOCIAL CAPITAL AND NETWORKING/Now think about people you know that don’t live in your village. In a typical week, how many people outside your village do you communicate with? Include all relatives, friends, traders, extension officers and other people. The way of communication (in-person or phone) does not matter.'].mean()
-#df_interactionFreq['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the people you know in your village. In a typical week, how many times do you communicate with each person you know? The way of communication (in-person or phone) does not matter.'].mean()
-
-#df_interactionFreq['intra_interaction_frequency'].mean()
-#df_interactionFreq['inter_interaction_frequency'].mean()
