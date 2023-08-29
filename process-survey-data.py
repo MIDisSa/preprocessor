@@ -135,11 +135,11 @@ df_mentionPerc = df_renamed
 df_mentionPerc = df_mentionPerc[df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts in your village. In how many discussions were hermetic storage bags mentioned?'] <= 10] #intra
 df_mentionPerc = df_mentionPerc[df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts outside of your village. In how many discussions were hermetic storage bags mentioned?'] <= 10] #inter
 
-df_mentionPerc['intra_mention_percentage'] = (1 - (np.sqrt(1 - df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts in your village. In how many discussions were hermetic storage bags mentioned?']/10))) * 100
-df_mentionPerc['inter_mention_percentage'] = (1 - (np.sqrt(1 - df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts outside of your village. In how many discussions were hermetic storage bags mentioned?']/10))) * 100
+df_mentionPerc['intra_mention_percentage'] = df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts in your village. In how many discussions were hermetic storage bags mentioned?']/10 * 100
+df_mentionPerc['inter_mention_percentage'] = df_mentionPerc['PART 7: SOCIAL CAPITAL AND NETWORKING/Think about the last 10 discussions you had with contacts outside of your village. In how many discussions were hermetic storage bags mentioned?']/10 * 100
 
-mean_intra_mention_percentage = df_mentionPerc['intra_mention_percentage'].mean()
-mean_inter_mention_percentage = df_mentionPerc['inter_mention_percentage'].mean()
+mean_intra_mention_percentage = df_mentionPerc['intra_mention_percentage'].median()
+mean_inter_mention_percentage = df_mentionPerc['inter_mention_percentage'].median()
 
 stdev_intra_mention_percentage = df_mentionPerc['intra_mention_percentage'].std()
 stdev_inter_mention_percentage = df_mentionPerc['inter_mention_percentage'].std()
