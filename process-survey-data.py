@@ -6,11 +6,11 @@
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
-import seaborn as sb
-import math
+#import seaborn as sb
+#import math
 
 # read csv file
-df = pd.read_csv("data.csv", header=0, decimal=",")
+df = pd.read_csv("data.csv", sep=",", header=0, decimal=".")
 
 """
 ==============================================
@@ -91,8 +91,7 @@ def create_dummy_variables(df, column):
     return df.join(dummy_df)
 
 
-df_TCI = create_dummy_variables(df_TCI,
-                                "PART 7: SOCIAL CAPITAL AND NETWORKING/What is your/partner's role in the group/institution?")
+df_TCI = create_dummy_variables(df_TCI, "PART 7: SOCIAL CAPITAL AND NETWORKING/What is your/partner's role in the group/institution?")
 
 # Logistic Regression
 x = df_TCI[['Enumerator: Select Farmer Group type',
@@ -101,8 +100,10 @@ x = df_TCI[['Enumerator: Select Farmer Group type',
 
 # solve shape issues
 y = df_TCI['PART 2: STORAGE AND POST-HARVEST/What kind of storage methods do you use?/Hermetic bag'].values
+#print(np.asarray(x))
 
 x = sm.add_constant(x)
+x = np.array(np.asarray(x), dtype=float)
 model = sm.Logit(y, x).fit()
 predictions = model.predict(x)
 coefficients = model.params
@@ -200,28 +201,28 @@ df_results = pd.DataFrame(columns=['train_chief_influence', 'nr_default_friends_
 
 
 # Assign the values
-df_results['train_chief_influence'] = sigmoid_value_TCI
+df_results['train_chief_influence'] = [round(sigmoid_value_TCI[0], 2)]
 
 # nr_default_friends_inter_village
-df_results['nr_default_friends_inter_village'] = [nr_default_friends_inter_village]
-df_results['std_nr_default_friends_inter_village'] = [std_nr_default_friends_inter_village]
+df_results['nr_default_friends_inter_village'] = [round(nr_default_friends_inter_village, 2)]
+df_results['std_nr_default_friends_inter_village'] = [round(std_nr_default_friends_inter_village, 2)]
 
 
 # avg_intra_mention_percentage
-df_results['avg_intra_mention_percentage'] = [mean_intra_mention_percentage]
-df_results['stdev_intra_mention_percentage'] = [stdev_intra_mention_percentage]
+df_results['avg_intra_mention_percentage'] = [round(mean_intra_mention_percentage, 2)]
+df_results['stdev_intra_mention_percentage'] = [round(stdev_intra_mention_percentage, 2)]
 
 # avg_inter_mention_percentage
-df_results['avg_inter_mention_percentage'] = [mean_inter_mention_percentage]
-df_results['stdev_inter_mention_percentage'] = [stdev_inter_mention_percentage]
+df_results['avg_inter_mention_percentage'] = [round(mean_inter_mention_percentage, 2)]
+df_results['stdev_inter_mention_percentage'] = [round(stdev_inter_mention_percentage, 2)]
 
 # avg_intra_village_interaction_frequency
-df_results['avg_intra_village_interaction_frequency'] = [mean_intra_interaction_frequency]
-df_results['stdev_intra_village_interaction_frequency'] = [stdev_intra_interaction_frequency]
+df_results['avg_intra_village_interaction_frequency'] = [round(mean_intra_interaction_frequency, 2)]
+df_results['stdev_intra_village_interaction_frequency'] = [round(stdev_intra_interaction_frequency, 2)]
 
 # avg_inter_village_interaction_frequency
-df_results['avg_inter_village_interaction_frequency'] = [mean_inter_interaction_frequency]
-df_results['stdev_inter_village_interaction_frequency'] = [stdev_inter_interaction_frequency]
+df_results['avg_inter_village_interaction_frequency'] = [round(mean_inter_interaction_frequency, 2)]
+df_results['stdev_inter_village_interaction_frequency'] = [round(stdev_inter_interaction_frequency, 2)]
 
 # avg_chief_farmer_meeting_frequency
 df_results['avg_chief_farmer_meeting_frequency'] = [30]
