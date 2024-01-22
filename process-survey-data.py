@@ -10,7 +10,7 @@ import statsmodels.api as sm
 #import math
 
 # read csv file
-df = pd.read_csv("data.csv", sep=",", header=0, decimal=".")
+df = pd.read_csv("./CSV-files-go-here/raw-data.csv", sep=",", header=0, decimal=".")
 
 """
 ==============================================
@@ -201,7 +201,7 @@ df_results = pd.DataFrame(columns=['train_chief_influence', 'nr_default_friends_
 
 
 # Assign the values
-df_results['train_chief_influence'] = [round(sigmoid_value_TCI[0], 2)]
+df_results['train_chief_influence'] = [round(sigmoid_value_TCI[0] * 100, 0)]
 
 # nr_default_friends_inter_village
 df_results['nr_default_friends_inter_village'] = [round(nr_default_friends_inter_village, 2)]
@@ -242,4 +242,4 @@ df_results['base_adoption_probability'] = [3]
 """
 
 # export data as csv file
-df_results.to_csv("data-processed.csv")
+df_results.to_csv("./CSV-files-go-here/data-processed.csv")
